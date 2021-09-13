@@ -10,6 +10,7 @@ using Alea.Parallel;
 using System.Drawing.Imaging;
 using Alea.CSharp;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace TestGPU.Labs
 {
@@ -21,7 +22,7 @@ namespace TestGPU.Labs
 
             Gpu gpu = Gpu.Default;
 
-            Image image = Image.FromFile(@"D:\Work\Education\Заочка\РиПВ\TestGPU\TestGPU\Labs\Implimentation\Lab2Space.jpg");
+            Image image = Image.FromFile($@"{ Directory.GetCurrentDirectory() }\input\Lab2Space.jpg");
             var bmImage = new Bitmap(image);
 
             var pixelMap = GetPixelMap(bmImage);
@@ -45,7 +46,7 @@ namespace TestGPU.Labs
 
             bmImage = SetNewPixelMap(bmImage, result);
 
-            bmImage.Save(@"D:\Work\Education\Заочка\РиПВ\TestGPU\TestGPU\Labs\Implimentation\Lab2SpaceConverted.jpg", ImageFormat.Jpeg);
+            bmImage.Save($@"{ Directory.GetCurrentDirectory() }\output\Lab2SpaceConverted.jpg", ImageFormat.Jpeg);
 
             Console.WriteLine("The end");
             Console.ReadKey();

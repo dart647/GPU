@@ -83,6 +83,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="input\Lab2Space.jpg" />
+    <Content Include="input\Lab3Cat.jpg" />
+    <Content Include="input\README.txt" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Alea.3.0.4\build\Alea.targets" Condition="Exists('..\packages\Alea.3.0.4\build\Alea.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
