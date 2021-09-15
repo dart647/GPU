@@ -21,7 +21,8 @@ namespace TestGPU
                 new Lab1(),
                 new Lab2(),
                 new Lab3(),
-                new Lab4()
+                new Lab4(),
+                new Lab5()
             };
         }
 

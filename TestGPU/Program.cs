@@ -16,6 +16,7 @@ namespace TestGPU
             Console.WriteLine("2 - Lab 2 - Перевод цветного изображения в градации серого на CUDA");
             Console.WriteLine("3 - Lab 3 - Размытие изображения на CUDA");
             Console.WriteLine("4 - Lab 4 - Сложение векторов на CUDA");
+            Console.WriteLine("5 - Lab 5 - Блочное перемножение матриц на CUDA");
 
             var labNumber = Int16.Parse(Console.ReadLine());
 
