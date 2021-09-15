@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Labs\Implimentation\Lab6.cs" />
     <Compile Include="Labs\Implimentation\Lab5.cs" />
     <Compile Include="Labs\Implimentation\Lab4.cs" />
     <Compile Include="Labs\Implimentation\Lab3.cs" />
