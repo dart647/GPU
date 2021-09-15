@@ -11,65 +11,26 @@ namespace TestGPU
     class LabManager
     {
         private ILab Lab { get; set; }
+        private List<ILab> Labs { get; }
 
         public LabManager()
         {
             Lab = new Lab1();
+            Labs = new List<ILab>()
+            {
+                new Lab1(),
+                new Lab2(),
+                new Lab3(),
+                new Lab4()
+            };
         }
 
         private void SetLab(int labNumber)
         {
-            switch (labNumber)
-            {
-                case 2:
-                    {
-                        Lab = new Lab2();
-                        break;
-                    }
-                case 3:
-                    {
-                        Lab = new Lab3();
-                        break;
-                    }
-                    //case 4:
-                    //    {
-                    //        Lab = new Lab1();
-                    //        break;
-                    //    }
-                    //case 5:
-                    //    {
-                    //        Lab = new Lab1();
-                    //        break;
-                    //    }
-                    //case 6:
-                    //    {
-                    //        Lab = new Lab1();
-                    //        break;
-                    //    }
-                    //case 7:
-                    //    {
-                    //        Lab = new Lab1();
-                    //        break;
-                    //    }
-                    //case 8:
-                    //    {
-                    //        Lab = new Lab1();
-                    //        break;
-                    //    }
-                    //case 9:
-                    //    {
-                    //        Lab = new Lab1();
-                    //        break;
-                    //    }
-                    //case 10:
-                    //    {
-                    //        Lab = new Lab1();
-                    //        break;
-                    //    }
-            }
+            Lab = Labs[labNumber - 1];
         }
 
-        public void ExecuteLab(int labNumber = 1)
+        public void ExecuteLab(int labNumber = 0)
         {
             SetLab(labNumber);
 
