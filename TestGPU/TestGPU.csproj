@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Labs\Implimentation\Lab7.cs" />
     <Compile Include="Labs\Implimentation\Lab6.cs" />
     <Compile Include="Labs\Implimentation\Lab5.cs" />
     <Compile Include="Labs\Implimentation\Lab4.cs" />
@@ -78,7 +79,7 @@
     <Compile Include="Labs\Implimentation\Lab2.cs" />
     <Compile Include="Labs\Implimentation\Lab1.cs" />
     <Compile Include="Labs\Interface\ILab.cs" />
-    <Compile Include="Labs\Manager\LabManager.cs" />
+    <Compile Include="Labs\Util\LabSwitcher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

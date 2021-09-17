@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestGPU.Util;
 
 namespace TestGPU
 {
@@ -12,6 +13,8 @@ namespace TestGPU
         static void Main(string[] args)
         {
             var isExit = false;
+            var switcher = new LabSwitcher();
+
             do
             {
                 Console.WriteLine("Choose lab");
@@ -21,16 +24,22 @@ namespace TestGPU
                 Console.WriteLine("4 - Lab 4 - Сложение векторов на CUDA");
                 Console.WriteLine("5 - Lab 5 - Блочное перемножение матриц на CUDA");
                 Console.WriteLine("6 - Lab 6 - Стандартное произведение матриц");
+                Console.WriteLine("7 - Lab 7 - Гистограмма текста");
                 Console.WriteLine("0 - Exit");
 
-                var labNumber = Int16.Parse(Console.ReadLine());
-
-                var manager = new LabManager();
-
-                if(!isExit)
-                    manager.ExecuteLab(labNumber);
-
-            } while (!isExit);
+                var key = Console.ReadLine();
+                if(Int16.TryParse(key, out short num))
+                {
+                    if(!(isExit = num == 0))
+                        switcher.ExecuteLab(num);
+                }
+                else
+                {
+                    Console.WriteLine("Wrong Key");
+                    Console.WriteLine();
+                }
+            } 
+            while (!isExit);
         }
     }
 }
