@@ -11,19 +11,26 @@ namespace TestGPU
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Choose lab");
-            Console.WriteLine("1 - Lab 1 - Обращение к устройству");
-            Console.WriteLine("2 - Lab 2 - Перевод цветного изображения в градации серого на CUDA");
-            Console.WriteLine("3 - Lab 3 - Размытие изображения на CUDA");
-            Console.WriteLine("4 - Lab 4 - Сложение векторов на CUDA");
-            Console.WriteLine("5 - Lab 5 - Блочное перемножение матриц на CUDA");
-            Console.WriteLine("6 - Lab 6 - Стандартное произведение матриц");
+            var isExit = false;
+            do
+            {
+                Console.WriteLine("Choose lab");
+                Console.WriteLine("1 - Lab 1 - Обращение к устройству");
+                Console.WriteLine("2 - Lab 2 - Перевод цветного изображения в градации серого на CUDA");
+                Console.WriteLine("3 - Lab 3 - Размытие изображения на CUDA");
+                Console.WriteLine("4 - Lab 4 - Сложение векторов на CUDA");
+                Console.WriteLine("5 - Lab 5 - Блочное перемножение матриц на CUDA");
+                Console.WriteLine("6 - Lab 6 - Стандартное произведение матриц");
+                Console.WriteLine("0 - Exit");
 
-            var labNumber = Int16.Parse(Console.ReadLine());
+                var labNumber = Int16.Parse(Console.ReadLine());
 
-            var manager = new LabManager();
+                var manager = new LabManager();
 
-            manager.ExecuteLab(labNumber);
+                if(!isExit)
+                    manager.ExecuteLab(labNumber);
+
+            } while (!isExit);
         }
     }
 }
