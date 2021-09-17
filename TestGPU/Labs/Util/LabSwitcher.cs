@@ -23,7 +23,8 @@ namespace TestGPU.Util
                 new Lab4(),
                 new Lab5(),
                 new Lab6(),
-                new Lab7()
+                new Lab7(),
+                new Lab8()
             };
         }
 
