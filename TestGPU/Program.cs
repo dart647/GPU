@@ -26,6 +26,7 @@ namespace TestGPU
                 Console.WriteLine("6 - Lab 6 - Стандартное произведение матриц");
                 Console.WriteLine("7 - Lab 7 - Гистограмма текста");
                 Console.WriteLine("8 - Lab 8 - Гистограмма");
+                Console.WriteLine("9 - Lab 9 - Разностная схема");
                 Console.WriteLine("0 - Exit");
 
                 var key = Console.ReadLine();
