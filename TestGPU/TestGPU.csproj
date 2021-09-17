@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Labs\Implimentation\Lab10.cs" />
     <Compile Include="Labs\Implimentation\Lab9.cs" />
     <Compile Include="Labs\Implimentation\Lab8.cs" />
     <Compile Include="Labs\Implimentation\Lab7.cs" />
@@ -90,6 +91,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="input\Lab10Castle.jpg" />
     <Content Include="input\Lab2Space.jpg" />
     <Content Include="input\Lab3Cat.jpg" />
     <Content Include="input\README.txt" />

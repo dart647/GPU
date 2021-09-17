@@ -15,18 +15,22 @@ using System.IO;
 
 namespace TestGPU.Labs
 {
-    class Lab3 : ILab
+    class Lab10 : ILab
     {
         public void Execute()
         {
-            Console.WriteLine("Lab 3 - Размытие изображения на CUDA");
+            Console.WriteLine("Lab 10 - Свертка");
 
             Gpu gpu = Gpu.Default;
+            var radious = 5;
 
-            Image image = Image.FromFile($@"{ Directory.GetCurrentDirectory() }\input\Lab3Cat.jpg");
+            Image image = Image.FromFile($@"{ Directory.GetCurrentDirectory() }\input\Lab10Castle.jpg");
             var bmImage = new Bitmap(image);
 
             var pixelMap = GetPixelMap(bmImage);
+            var pixelMask = GetPixelMask(radious);
+
+            ShowMask(pixelMask, radious);
 
             int[,] resultR, resultG, resultB;
             int w = bmImage.Width;
@@ -47,7 +51,7 @@ namespace TestGPU.Labs
                 {
                     for (int j = 0; j < h; j++)
                     {
-                        var newPixel = BlurPixel(pixelMap, i, j, w, h);
+                        var newPixel = SetMaskToPixel(pixelMap, pixelMask, i, j, w, h, radious);
                         ptrR[i * pitchR + j] = newPixel.r;
                         ptrG[i * pitchG + j] = newPixel.g;
                         ptrB[i * pitchB + j] = newPixel.b;
@@ -60,42 +64,40 @@ namespace TestGPU.Labs
 
             bmImage = SetNewPixelMap(bmImage, resultR, resultG, resultB);
 
-            bmImage.Save($@"{ Directory.GetCurrentDirectory() }\output\Lab3CatConverted.jpg", ImageFormat.Jpeg);
+            bmImage.Save($@"{ Directory.GetCurrentDirectory() }\output\Lab10CastleConverted.jpg", ImageFormat.Jpeg);
 
             Console.WriteLine("The end");
             Console.ReadKey();
         }
 
-        private RGB BlurPixel(RGB[,] pixelMap, int w, int h, int width, int height)
+        private RGB SetMaskToPixel(RGB[,] pixelMap, RGBMask[,] pixelMask, int w, int h, int width, int height, double radious)
         {
             double r = 0;
             double g = 0;
             double b = 0;
-            var counter = 0;
-            var radious = 5;
+            var rad = (int)Math.Round(radious / 2);
 
-            for (int i = w - radious; i < w + radious; i++)
+            for (int i = w - rad, k = 0; i < w + rad; i++, k++)
             {
                 if (i >= 0 && i < width)
-                    for (int j = h - radious; j < h + radious; j++)
+                    for (int j = h - rad, d = 0; j < h + rad; j++, d++)
                     {
                         if (j >= 0 && j < height)
                         {
-                            var cur = pixelMap[i, j];
-
-                            r += cur.r;
-                            g += cur.g;
-                            b += cur.b;
-                            counter++;
+                            var pixel = pixelMap[i, j];
+                            var mask = pixelMask[k, d];
+                            r += pixel.r * mask.r;
+                            g += pixel.g * mask.g;
+                            b += pixel.b * mask.b;
                         }
                     }
             }
 
             return new RGB
             {
-                r = (int)Math.Round(r / counter),
-                g = (int)Math.Round(g / counter),
-                b = (int)Math.Round(b / counter)
+                r = (int)Math.Round(r) % 255,
+                g = (int)Math.Round(g) % 255,
+                b = (int)Math.Round(b) % 255
             };
         }
 
@@ -133,7 +135,43 @@ namespace TestGPU.Labs
             }
 
             return pixelMap;
-        }     
+        }
+
+        private RGBMask[,] GetPixelMask(int radious)
+        {
+            var pixelMask = new RGBMask[radious, radious];
+
+            var rand = new Random();
+
+            for (int i = 0; i < radious; i++)
+            {
+                for (int j = 0; j < radious; j++)
+                {
+                    pixelMask[i, j] = new RGBMask
+                    {
+                        r = rand.NextDouble(),
+                        g = rand.NextDouble(),
+                        b = rand.NextDouble(),
+                    };
+                }
+            }
+
+            return pixelMask;
+        }
+
+        private void ShowMask(RGBMask[,] mask, int radious)
+        {
+            Console.WriteLine("Маска:");
+            for (int i = 0; i < radious; i++)
+            {
+                for (int j = 0; j < radious; j++)
+                {
+                    Console.Write($"({mask[i, j].r:0.00}, {mask[i, j].g:0.00}, {mask[i, j].b:0.00})");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
 
         private struct RGB
         {
@@ -141,5 +179,12 @@ namespace TestGPU.Labs
             public int g { get; set; }
             public int b { get; set; }
         }
+        private struct RGBMask
+        {
+            public double r { get; set; }
+            public double g { get; set; }
+            public double b { get; set; }
+        }
+
     }
 }
