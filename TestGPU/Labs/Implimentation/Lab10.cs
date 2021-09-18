@@ -12,6 +12,7 @@ using Alea.CSharp;
 using System.Security.Cryptography;
 using Alea.FSharp;
 using System.IO;
+using System.Diagnostics;
 
 namespace TestGPU.Labs
 {
@@ -75,7 +76,8 @@ namespace TestGPU.Labs
             double r = 0;
             double g = 0;
             double b = 0;
-            var rad = (int)Math.Round(radious / 2);
+            var counter = 0;
+            var rad = (int)Math.Floor(radious / 2);
 
             for (int i = w - rad, k = 0; i < w + rad; i++, k++)
             {
@@ -89,15 +91,16 @@ namespace TestGPU.Labs
                             r += pixel.r * mask.r;
                             g += pixel.g * mask.g;
                             b += pixel.b * mask.b;
+                            counter++;
                         }
                     }
             }
 
             return new RGB
             {
-                r = (int)Math.Round(r) % 255,
-                g = (int)Math.Round(g) % 255,
-                b = (int)Math.Round(b) % 255
+                r = (int)Math.Floor(r / counter),
+                g = (int)Math.Floor(g / counter),
+                b = (int)Math.Floor(b / counter)
             };
         }
 
@@ -166,8 +169,9 @@ namespace TestGPU.Labs
             {
                 for (int j = 0; j < radious; j++)
                 {
-                    Console.Write($"({mask[i, j].r:0.00}, {mask[i, j].g:0.00}, {mask[i, j].b:0.00})");
+                    Console.Write($"({mask[i, j].r:0.00}, {mask[i, j].g:0.00}, {mask[i, j].b:0.00}) ");
                 }
+                Console.WriteLine();
                 Console.WriteLine();
             }
             Console.WriteLine();
