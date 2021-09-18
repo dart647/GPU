@@ -98,9 +98,9 @@ namespace TestGPU.Labs
 
             return new RGB
             {
-                r = (int)Math.Floor(r / counter),
-                g = (int)Math.Floor(g / counter),
-                b = (int)Math.Floor(b / counter)
+                r = (int)Math.Round(r / counter),
+                g = (int)Math.Round(g / counter),
+                b = (int)Math.Round(b / counter)
             };
         }
 
